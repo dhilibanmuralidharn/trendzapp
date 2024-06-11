@@ -1,0 +1,12 @@
+.login-main-container{
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  height: 100vh;
+}
+.login-img{
+  width: 100%;
+  max-width: 650px;
+}
