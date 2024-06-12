@@ -21,7 +21,10 @@ function App() {
   const [cartList, setCartList] = useState(getLocalStorageData("cartData"));
   const [loginList, setLoginList] = useState(getLocalStorageData("loginData"));
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem("authToken");
+    return token;
+  });
 
   useEffect(() => {
     localStorage.setItem("cartData", JSON.stringify(cartList));
@@ -58,7 +61,9 @@ function App() {
   const decrementCartItemQuantity = (id) => {
     setCartList((prevCartList) =>
       prevCartList.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+        item.id === id && item.quantity > 1
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
       )
     );
   };
